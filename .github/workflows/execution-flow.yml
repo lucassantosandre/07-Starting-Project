@@ -79,6 +79,7 @@ jobs:
         run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod -y
 
   report:
+    needs: [lint, deploy]
     if: failure()
     runs-on: ubuntu-latest
     steps:
