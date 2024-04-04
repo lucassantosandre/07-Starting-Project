@@ -77,3 +77,12 @@ jobs:
         run: ls 
       - name: Deploy
         run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod -y
+
+  report:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print test report
+        run: |
+          echo "Something went wrong"
+          echo "${{ github }}"
