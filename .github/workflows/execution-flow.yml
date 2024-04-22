@@ -8,7 +8,7 @@ jobs:
     uses: ./.github/workflows/lint-workflow.yml
   test:
     needs: lint
-    uses: ./.github/workflows/test-workflow.yml
+    uses: ./.github/workflows/test-workflow-continue.yml
   build:
     needs: test
     uses: ./.github/workflows/build-workflow.yml
