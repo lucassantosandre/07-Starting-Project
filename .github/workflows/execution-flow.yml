@@ -5,7 +5,7 @@ jobs:
     uses: ./.github/workflows/lint-workflow.yml
   test:
     needs: lint
-    uses: ./.github/workflows/test-workflow-continue.yml
+    uses: ./.github/workflows/test-workflow.yml
   build:
     needs: test
     uses: ./.github/workflows/build-workflow.yml
@@ -14,6 +14,8 @@ jobs:
     uses: ./.github/workflows/deploy-workflow.yml
     secrets:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    with:
+      artifact-name: dist-files
   report:
     needs: [lint, deploy]
     if: failure()
