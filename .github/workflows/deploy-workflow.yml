@@ -1,0 +1,17 @@
+name: Deploy
+on:
+  workflow_call:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Output files
+        run: ls 
+      - name: Deploy
+        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod -y
