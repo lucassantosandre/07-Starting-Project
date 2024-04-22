@@ -15,6 +15,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/deploy-workflow.yml
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   report:
     needs: [lint, deploy]
     if: failure()
