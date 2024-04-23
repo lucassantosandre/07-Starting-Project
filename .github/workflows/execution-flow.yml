@@ -16,6 +16,13 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     with:
       artifact-name: dist-files
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deployment result
+        run: | 
+          echo "Deployment result: ${{ needs.deploy.outputs.result }}"
   report:
     needs: [lint, deploy]
     if: failure()

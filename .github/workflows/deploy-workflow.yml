@@ -10,8 +10,14 @@ on:
         required: true
         default: dist
         type: string
+    outputs:
+      result:
+        description: 'The result of the deployment'
+        value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-output.outputs.steps-result }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository 
@@ -28,3 +34,6 @@ jobs:
         run: ls -lrt
       - name: Deploy
         run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod -y
+      - name: Set output
+        id: set-output
+        run: echo "::set-output name=steps-result::success"
